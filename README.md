@@ -1,4 +1,5 @@
-Analyse des Dynamiques Communautaires sur Reddit autour du Changement Climatique
+## Analyse des Dynamiques Communautaires sur Reddit autour du Changement Climatique
+
 🎯 Introduction
 
 Dans le cadre du Projet Complexe (ProCom) de troisième année ou deuxième année de master, il nous a été confié comme tâche d’analyser les dynamiques des interactions des communautés se battant en faveur du changement climatique d’une part, et des communautés en faveur du négationnisme de ce dernier.
