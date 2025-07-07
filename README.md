@@ -1,135 +1,114 @@
-# Analyse-des-dynamiques-communautaires-en-ligne-des-activistes-de-climat-sur-Reddit
-🌍 Analyse des Dynamiques de Communautés sur Reddit : Climat vs Négationnisme
+Analyse des Dynamiques Communautaires sur Reddit autour du Changement Climatique
+🎯 Introduction
 
-📘 Introduction : 
+Dans le cadre du Projet Complexe (ProCom) de troisième année ou deuxième année de master, il nous a été confié comme tâche d’analyser les dynamiques des interactions des communautés se battant en faveur du changement climatique d’une part, et des communautés en faveur du négationnisme de ce dernier.
 
-Ce projet s'inscrit dans le cadre du Projet Complexe (ProCom) de troisième année ou de deuxième année de Master. Il explore les dynamiques d’interaction entre deux types de communautés sur Reddit :
+❓ Problématique
 
-Celles militant pour la lutte contre le changement climatique
+Examiner et déterminer l’existence d’événements sociétaux particuliers susceptibles de stimuler une augmentation des interactions au sein des communautés d’activistes impliquées dans la lutte contre le changement climatique, ainsi que des communautés qui soutiennent le négationnisme climatique sur Reddit.
 
-Celles adoptant une posture négationniste vis-à-vis de ce phénomène
+🎯 Objectifs
 
-❓ Problématique : 
+L’objectif principal de ce projet est de saisir la dynamique des échanges entre les différentes communautés impliquées dans le débat sur le changement climatique, en particulier sur la plateforme Reddit.
 
-Existe-t-il des événements sociétaux particuliers susceptibles de stimuler une augmentation des interactions au sein de ces communautés sur Reddit ?
+Reddit, en tant que réseau social structuré autour de sous-communautés appelées subreddits, offre un terrain propice à l’analyse des échanges en ligne. Les interactions entre utilisateurs (posts, commentaires, votes, récompenses) constituent des indicateurs clés que nous avons exploités pour mieux comprendre les dynamiques communautaires.
 
-Nous avons cherché à répondre à cette question à travers une exploration systématique des données issues de Reddit.
+Les étapes suivies dans ce projet sont les suivantes :
 
-🎯 Objectifs : 
+• Récolte automatique des éléments d’interaction (posts, commentaires) grâce à un scraper basé sur la bibliothèque PRAW
+• Compréhension des besoins du métier et adaptation de notre approche
+• Transformation des données pour les rendre exploitables par des algorithmes de suivi de communautés
+• Utilisation et adaptation de métriques pertinentes afin de mieux caractériser ces communautés
+• Construction d’une base de données structurée et interrogeable par l’utilisateur final
 
-Comprendre la dynamique des échanges entre communautés pro-climat et climato-sceptiques.
+🧭 Contextualisation : Présentation de Reddit
 
-Utiliser Reddit comme terrain d’étude pour analyser l’évolution et l’intensité des interactions autour de cette controverse.
+Reddit est un forum social fondé en 2005, structuré autour de thématiques appelées subreddits. Chaque subreddit fonctionne comme une communauté indépendante avec ses propres règles, modérateurs et types de contenu. Les utilisateurs ("redditors") y partagent des liens, images, textes ou vidéos, qui sont ensuite soumis aux votes de la communauté.
 
-Identifier les déclencheurs d’activités communautaires : pics de posts, de commentaires, de récompenses, etc.
+Fonctionnalités clés :
 
-🧠 Méthodologie : 
-Voici la chaîne de traitement de notre solution, de la compréhension du besoin métier à l'analyse des résultats :
+• Votes positifs/négatifs : influencent la visibilité des contenus
+• Commentaires imbriqués : favorisent des discussions hiérarchisées
+• Awards : récompensent les contenus jugés de qualité
+• Karma : mesure la réputation des utilisateurs
 
-Compréhension du besoin métier
+Catégories de tri des publications :
 
-Création et test d’un protocole d’extraction de données
+• Hot : contenus très engageants récents
+• Top : contenus les plus votés sur différentes périodes
+• New : dernières publications
+• Rising : contenus en pleine ascension
 
-Choix des communautés pertinentes sur Reddit
+Cette richesse fonctionnelle fait de Reddit une plateforme d’étude idéale pour observer les dynamiques d’engagement communautaire autour de sujets sensibles ou polarisants comme le climat.
 
-Scraping des données via API Reddit (OAuth2 + PRAW)
+🧪 La chaîne de traitement de notre solution
 
-Organisation d’une base de données relationnelle
+Afin de répondre aux besoins exprimés, nous avons adopté une méthodologie rigoureuse, articulée autour des étapes suivantes :
 
-Exploration statistique et visualisation
+Compréhension du besoin métier du commanditaire
 
-Analyses avancées sur les publications et commentaires
+Élaboration d’un protocole d’extraction des données Reddit
 
-🛠️ Extraction des Données Reddit : 
+Tests unitaires du protocole de scraping
 
-L'extraction a été réalisée à l'aide de PRAW, une bibliothèque Python pour interagir avec l’API Reddit. Voici un aperçu des méthodes utilisées :
+Sélection des subreddits pertinents pour l’étude
 
-a. Méthode API Reddit avec OAuth2 : 
+Extraction des données (posts, commentaires) via l’API Reddit
 
-Authentification sécurisée grâce à des clés d'application.
+Structuration des données dans une base relationnelle
 
-Collecte automatisée de :
+Exploration et analyses descriptives des données
 
-Publications (posts)
+Analyses avancées, incluant le suivi des dynamiques communautaires
 
-Commentaires
+🔍 Protocole d’extraction des données Reddit
 
-Awards et scores de karma
+L’extraction a été réalisée via l’API officielle de Reddit, en particulier à l’aide de la bibliothèque Python PRAW (Python Reddit API Wrapper), en mode authentifié avec OAuth2.
 
-Ciblage de subreddits spécifiques liés au climat et au scepticisme environnemental.
+Deux types d’accès API
 
-b. Mode d’emploi rapide (via PRAW) : 
-python
-Copier le code
-import praw
+a. API publique (open access)
 
-reddit = praw.Reddit(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
-    user_agent="ClimateChangeAnalysis by /u/YOUR_USERNAME"
-)
+Accès libre sans authentification
+Format JSON accessible via les URLs, par exemple :
+https://www.reddit.com/r/python/hot.json
 
-subreddit = reddit.subreddit("climate")
-for post in subreddit.hot(limit=10):
-    print(post.title)
-    
-🗃️ Structure des Données : 
+b. API authentifiée (OAuth2)
 
-Reddit fonctionne selon une hiérarchie claire :
+Requiert une inscription en tant que 
+développeur pour obtenir un client ID et un secret
+Permet un accès plus large aux données (historiques de commentaires, messages privés, etc.)
+Utilisée dans notre projet via la configuration OAuth2 dans PRAW
 
-Subreddit → Collection de publications sur un thème
+Étapes du scraping
 
-Post → Point d’entrée d’une discussion
+• Création d’une application Reddit pour récupérer les identifiants
+• Configuration dans PRAW des clés : client_id, client_secret, user_agent, username, password
+• Définition des critères de scraping : subreddit, période, type de contenu
+• Boucle de récupération avec filtrage des champs utiles : auteur, score, date, nombre de commentaires, texte, award, etc.
+• Stockage des données en format brut (JSON ou CSV)
+• Nettoyage et transformation vers une base SQL
 
-Commentaires → Hiérarchisés en fils de discussions imbriqués
+🧠 Perspectives
 
-Votes et awards → Mécanismes de réputation pour trier les contenus
+Ce projet ouvre des perspectives intéressantes :
 
-Nous avons structuré notre base pour refléter cette organisation :
-Subreddits → Posts → Commentaires + Votes + Awards
+• Suivi de l’évolution temporelle des opinions et sujets
+• Détection de pics d’activité liés à l’actualité
+• Cartographie des interactions entre communautés
+• Création de tableaux de bord pour les chercheurs ou décideurs publics
 
-📊 Analyses Réalisées : 
+🛠️ Technologies utilisées
 
-Analyse temporelle des pics d’activité
+• Langage : Python 3.x
+• Librairies : PRAW, Pandas, Matplotlib, Seaborn, NetworkX
+• Base de données : PostgreSQL
+• Outils : Jupyter Notebook, VS Code, Git, GitHub
 
-Visualisation des échanges : volumes de commentaires, publications, karma
+📄 Licence
 
-Comparaison entre les dynamiques des deux camps (pro-climat vs sceptiques)
+Ce projet est réalisé à des fins pédagogiques dans le cadre du cursus universitaire. Toute réutilisation du code ou des données est libre tant qu’elle respecte les droits d’auteur liés aux sources utilisées (API Reddit, bibliothèques open-source).
 
-Identification de topics ou événements déclencheurs de débats
+🤝 Remerciements
 
-📌 Présentation de Reddit (pour contextualisation) : 
-Reddit est une plateforme fondée en 2005, structurée autour de communautés thématiques appelées subreddits. Chaque contenu est soumis au vote de la communauté, ce qui détermine sa visibilité. Reddit se distingue par :
-
-Son auto-modération communautaire
-
-Sa capacité à faire émerger les tendances populaires
-
-Ses catégories de contenu : Hot, Top, New, Rising
-
-Ce système est au cœur de notre analyse : nous l'avons utilisé pour détecter des changements soudains dans la dynamique de publication et d’engagement.
-
-🔧 Technologies Utilisées : 
-
-Python 3.10+
-
-PRAW (Python Reddit API Wrapper)
-
-Pandas, NumPy, Matplotlib, Seaborn
-
-SQLite / PostgreSQL (pour stockage des données)
-
-Jupyter Notebooks
-
-📜 Licence : 
-
-Ce projet est distribué sous licence MIT.
-
-🤝 Contributeurs : 
-
-RAZZOUK Soumaya
-MAHMOUDI Sarra
-DERBEL Yassine
-ZHENG Ruxin
-
-
+Merci à notre encadrant·e et à toute l’équipe pédagogique pour leur accompagnement, ainsi qu’à la communauté Reddit pour l’ouverture de leurs données via l’API.
