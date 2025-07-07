@@ -1,6 +1,8 @@
 # Analyse-des-dynamiques-communautaires-en-ligne-des-activistes-de-climat-sur-Reddit
 🌍 Analyse des Dynamiques de Communautés sur Reddit : Climat vs Négationnisme
-📘 Introduction
+
+📘 Introduction : 
+
 Ce projet s'inscrit dans le cadre du Projet Complexe (ProCom) de troisième année ou de deuxième année de Master. Il explore les dynamiques d’interaction entre deux types de communautés sur Reddit :
 
 Celles militant pour la lutte contre le changement climatique
